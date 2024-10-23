@@ -16,5 +16,10 @@ namespace NetCore_BurgerOrder.Models.ViewModels
         [Display(Name = "Şifre")]
         [Required(ErrorMessage = "Şifre boş geçilemez!")]
         public string Password { get; set; }
+
+        [Display(Name = "Şifre (Tekrar)")]
+        [Required(ErrorMessage = "Şifre (Tekrar) boş geçilemez!")]
+        [Compare("Password",ErrorMessage ="Şifreler aynı değil")]
+        public string ConfirmPassword { get; set; }
     }
 }

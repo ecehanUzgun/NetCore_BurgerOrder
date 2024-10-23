@@ -26,8 +26,8 @@ namespace NetCore_BurgerOrder
                 options.Password.RequiredLength = 6;
             });
 
-            //AddIdentity
-            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ProjectContext>();
+            //AddIdentity AppUser AppRole !!!
+            builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ProjectContext>();
 
             var app = builder.Build();
 
@@ -44,6 +44,7 @@ namespace NetCore_BurgerOrder
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
