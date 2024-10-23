@@ -7,5 +7,6 @@ Identity, Cookie, Session kullanýlacak.
 ++ Program.cs 
 ++ Migration ekle, database oluþtur
 ++ ViewModel oluþtur
--- Register ->Controller ->View
--- Login ->Controller ->View
+++ Register ->Controller ->View
+++ Login ->Controller ->View (RememberMe ekle)
+-- Admin giriþ yaptýðýnda Dashboard'a yönlendirsin

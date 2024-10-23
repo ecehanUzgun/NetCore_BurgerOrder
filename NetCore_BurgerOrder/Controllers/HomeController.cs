@@ -67,6 +67,25 @@ namespace NetCore_BurgerOrder.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM loginVM, bool rememberMe)
+        {
+            if (ModelState.IsValid) 
+            {
+                AppUser appUser = await _userManager.FindByEmailAsync(loginVM.Email);
+                if (appUser != null)
+                {
+                    var result = await _signInManager.PasswordSignInAsync(appUser, loginVM.Password, rememberMe, false);
+
+                    if (result.Succeeded) 
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            return View(loginVM);
+        }
+
         public IActionResult Privacy()
         {
             return View();
