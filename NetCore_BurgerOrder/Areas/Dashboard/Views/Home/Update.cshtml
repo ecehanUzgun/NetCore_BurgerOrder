@@ -1,0 +1,20 @@
+﻿@model AppUser
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    <input type="hidden" asp-for="Id"/>
+    @foreach (var role in ViewBag.Roles)
+    {
+        <div class="form-check">
+            <input class="form-check-input" name="selectedRoleName" type="checkbox" value="@role.Text" id="@role.Value"/>
+            <label class="form-check-label" for="@role.Value">
+                @role.Text
+            </label>
+        </div>
+    }
+    <button type="submit">Update</button>
+</form>
+

@@ -26,7 +26,20 @@ namespace NetCore_BurgerOrder
                 options.Password.RequiredLength = 6;
             });
 
-            //AddIdentity AppUser AppRole !!!
+            // Cookie Manager: Ýçerisinde küçük boyutlu verileri tutan ve bu verilere sadece browser'dan ulaþan küçük yapýlardýr.
+            builder.Services.ConfigureApplicationCookie(cookie =>
+            {
+                cookie.Cookie = new CookieBuilder
+                {
+                    Name = "LoginCookie"
+                };
+
+                cookie.LoginPath = new PathString("/Home/Login"); //kimlik doðrulama gerektiren bir sayfaya eriþim yapýlýrken kullanýcý giriþ yapmamýþsa, kullanýcýnýn yönlendirileceði giriþ sayfasýnýn yolunu belirtir
+                cookie.SlidingExpiration = true;
+                cookie.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+            });
+
+            // AddIdentity AppUser AppRole 
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ProjectContext>();
 
             var app = builder.Build();
@@ -44,12 +57,21 @@ namespace NetCore_BurgerOrder
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseAuthentication();//kimlik yönetimi rol bazlý oturum için tanýmlanmasý gereken servis
+            app.UseAuthorization();//oturum
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
+            });
 
             app.Run();
         }

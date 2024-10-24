@@ -1,0 +1,69 @@
+﻿@model List<AppUser>
+@inject UserManager<AppUser> usermanager
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12 d-flex justify-content-between">
+    <a asp-action="Create" asp-controller="Role" asp-area="Dashboard" class="btn btn-primary">
+        Create Role
+    </a>
+    <div class="d-flex">
+        @foreach (var item in (ViewBag.Roles as List<AppRole>))
+        {
+            switch (item.Name)
+            {
+                case "admin":
+                    <span class="bg-danger me-2">@item.Name</span>
+                    break;
+
+                case "user":
+                    <span class="bg-primary me-2">@item.Name</span>
+                    break;
+
+                case "basic":
+                    <span class="bg-secondary me-2">@item.Name</span>
+                    break;
+
+                default:
+                    <span class="me-2">@item.Name</span>
+                    break;
+            }
+        }
+    </div>
+</div>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.UserName</td>
+                <td>@item.Email</td>
+                <td>
+                    @foreach (var role in usermanager.GetRolesAsync(item).Result)
+                    {
+                        <span>@role</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Update" asp-controller="Home" asp-area="Dashboard" asp-route-id="@item.Id">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</tabl>
+
+

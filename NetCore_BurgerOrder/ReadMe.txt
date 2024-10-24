@@ -9,4 +9,6 @@ Identity, Cookie, Session kullanýlacak.
 ++ ViewModel oluþtur
 ++ Register ->Controller ->View
 ++ Login ->Controller ->View (RememberMe ekle)
+-- Area Template
 -- Admin giriþ yaptýðýnda Dashboard'a yönlendirsin
+-- Dashboard Update Create
