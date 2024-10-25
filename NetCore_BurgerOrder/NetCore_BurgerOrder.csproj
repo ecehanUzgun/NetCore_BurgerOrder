@@ -20,6 +20,8 @@
   <ItemGroup>
     <Folder Include="Areas\Dashboard\Data\" />
     <Folder Include="Areas\Dashboard\Models\" />
+    <Folder Include="Areas\Dashboard\Services\Abstracts\" />
+    <Folder Include="Areas\Dashboard\Services\Concretes\" />
   </ItemGroup>
 
 </Project>

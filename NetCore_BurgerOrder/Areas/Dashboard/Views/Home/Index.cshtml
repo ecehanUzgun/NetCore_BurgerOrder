@@ -9,6 +9,9 @@
     <a asp-action="Create" asp-controller="Role" asp-area="Dashboard" class="btn btn-primary">
         Create Role
     </a>
+    <a asp-action="Delete" asp-controller="Role" asp-area="Dashboard" class="btn btn-danger">
+        Delete Role
+    </a>
     <div class="d-flex">
         @foreach (var item in (ViewBag.Roles as List<AppRole>))
         {

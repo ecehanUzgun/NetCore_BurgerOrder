@@ -28,12 +28,30 @@ namespace NetCore_BurgerOrder.Areas.Dashboard.Controllers
             var result = await _roleManager.CreateAsync(appRole);
             if (result.Succeeded) 
             { 
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index");
             }
             else
             {
                 return View();
             }
+        }
+
+        public async Task<IActionResult> Delete(string id) 
+        {
+            var deleted = await _roleManager.FindByIdAsync(id);
+            if (deleted != null)
+            {
+                return View(deleted);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(AppRole appRole)
+        {
+            _roleManager.DeleteAsync(appRole);
+            TempData["Status"] = "Ürün başarıyla silindi.";
+            return RedirectToAction("Index");
         }
     }
 }
