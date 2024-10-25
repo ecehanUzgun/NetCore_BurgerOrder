@@ -5,8 +5,14 @@
 }
 
 <form method="post">
-    <label>Role Name</label>
-    <input type="text" asp-for=Name class="form-control" />
-    <button type="submit">Delete</button>
+    <input asp-for="Id" type="hidden" />
+    <div>
+        <label>Role Name</label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
 </form>
 

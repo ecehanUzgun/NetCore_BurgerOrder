@@ -1,0 +1,21 @@
+﻿@model AppUser
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Delete" method="post">
+    <input asp-for="Id" type="hidden" />
+    <div>
+        <label>Username</label>
+        <input type="text" asp-for="UserName" class="form-control" />
+    </div>
+    <div>
+        <label>Email</label>
+        <input type="email" asp-for="Email" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+

@@ -27,6 +27,7 @@ namespace NetCore_BurgerOrder.Areas.Dashboard.Controllers
             return View(_userManager.Users.ToList());
         }
 
+        //User role update
         public async Task<IActionResult> Update(string id) 
         { 
             var user = await _userManager.FindByIdAsync(id);
@@ -63,6 +64,7 @@ namespace NetCore_BurgerOrder.Areas.Dashboard.Controllers
             {
                 var roles = await _userManager.GetRolesAsync(user);
 
+                var userAccount = await _userManager.FindByIdAsync(appUser.Id.ToString());
                 //Önceki roller kaldırılır
                 foreach (var deletedRole in roles) 
                 { 
@@ -75,9 +77,57 @@ namespace NetCore_BurgerOrder.Areas.Dashboard.Controllers
                     await _userManager.AddToRoleAsync(user, role);
                 }
 
+                if (ModelState.IsValid)
+                {
+                    userAccount.UserName = appUser.UserName;
+                    userAccount.BirthDate = appUser.BirthDate;
+                    userAccount.Email = appUser.Email;
+
+                    var result = await _userManager.UpdateAsync(userAccount);
+                }
+
                 await _signInManager.SignOutAsync();
                 await _signInManager.SignInAsync(user, false);
             }
+            return RedirectToAction("Index");
+        }
+
+        //User Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(AppUser appUser)
+        {
+            var result = await _userManager.CreateAsync(appUser);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        //User Delete
+        public async Task<IActionResult> Delete(string id)
+        {
+            var deleted = await _userManager.FindByIdAsync(id);
+            if (deleted != null)
+            {
+                return View(deleted);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(AppUser appUser)
+        {
+            _userManager.DeleteAsync(appUser);
+            TempData["Status"] = "Kullanıcı başarıyla silindi.";
             return RedirectToAction("Index");
         }
     }

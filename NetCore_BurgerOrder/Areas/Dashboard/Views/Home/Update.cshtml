@@ -6,15 +6,30 @@
 
 <form method="post">
     <input type="hidden" asp-for="Id"/>
-    @foreach (var role in ViewBag.Roles)
-    {
-        <div class="form-check">
-            <input class="form-check-input" name="selectedRoleName" type="checkbox" value="@role.Text" id="@role.Value"/>
-            <label class="form-check-label" for="@role.Value">
-                @role.Text
-            </label>
+    <div class="form-group">
+        <div>
+            <label>Roles</label>
+            @foreach (var role in ViewBag.Roles)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" name="selectedRoleName" type="checkbox" value="@role.Text" id="@role.Value" />
+                    <label class="form-check-label" for="@role.Value">
+                        @role.Text
+                    </label>
+                </div>
+            }
         </div>
-    }
-    <button type="submit">Update</button>
+        <div>
+            <label asp-for="UserName">Username</label>
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" type="email"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-warning">Update</button>
 </form>
 

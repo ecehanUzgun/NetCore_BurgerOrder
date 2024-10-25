@@ -12,10 +12,13 @@ Identity, Cookie, Session kullanýlacak.
 ++ Area Template
 -- Admin giriþ yaptýðýnda Dashboard'a yönlendirsin
 -- Dashboard Update Create
--- Role CRUD (Admin yapabilir)
--- User CRUD (Admin yapabilir)
+++ Role CRUD (Admin yapabilir)
+-- User CRUD (Admin yapabilir)	*****
 -- Admin rolündeki kullanýcý giriþ yaptýðýnda Adminlte ekraný açýlsýn.
 
 -- Home/Index -> Hamburger menu , Alýþveriþi tamamla butonuna týklayýnca login, hesap yoksa register
 
---Dashboard/Role/Index -> Roller listenelenecek tablo halinde CRUD iþlemleri her biri için button
+++ Dashboard/Role/Index -> Roller listenelenecek tablo halinde CRUD iþlemleri her biri için button
+++ Create Role, description ekle
+
+++ Area'da Logout, Account çalýþmýyor!!!!! -> Çözüldü _Layout'da area="" tanýmlayarak
