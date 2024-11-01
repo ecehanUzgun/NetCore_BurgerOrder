@@ -56,5 +56,43 @@ namespace NetCore_BurgerOrder.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult UpdateCartItem(int id, int quantity) 
+        {
+            var cartSession = SessionHelper.GetProductFromJson<CartSession>(HttpContext.Session, "sepet");
+
+            if (cartSession != null) 
+            { 
+                cartSession.UpdateCart(id,quantity);
+
+                SessionHelper.SetProductFromJson(HttpContext.Session, "sepet", cartSession);
+                TempData["SuccessStatus"] = "Sepet güncellendi!";
+            }
+            else
+            {
+                TempData["ErrorStatus"] = "Sepetiniz boş!";
+            }
+
+            return RedirectToAction("Index");
+        }     
+
+        public IActionResult RemoveCartItem(int id) 
+        {
+            var cartSession = SessionHelper.GetProductFromJson<CartSession>(HttpContext.Session, "sepet");
+            if (cartSession != null) 
+            {
+                cartSession.DeleteCart(id);
+                SessionHelper.SetProductFromJson(HttpContext.Session, "sepet", cartSession);
+                TempData["SuccessStatus"] = "Ürün sepetten kaldırıldı!";
+            }
+            else
+            {
+                TempData["ErrorStatus"] = "Sepetiniz boş!";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

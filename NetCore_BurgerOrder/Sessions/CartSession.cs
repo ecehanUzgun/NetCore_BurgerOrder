@@ -23,11 +23,20 @@ namespace NetCore_BurgerOrder.Sessions
         }
 
         //Sepet güncelleme
-        public void UpdateCart(int productId, int quantity) 
+        public void UpdateCart(int productId, int quantity)
         {
             if (MyCart.ContainsKey(productId))
             {
                 MyCart[productId].Quantity = quantity;
+            }
+        }
+
+        //Sepet silme
+        public void DeleteCart(int productId) 
+        {
+            if (MyCart.ContainsKey(productId))
+            {
+                MyCart.Remove(productId);
             }
         }
     }

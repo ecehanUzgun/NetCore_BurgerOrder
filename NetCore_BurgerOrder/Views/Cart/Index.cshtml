@@ -13,7 +13,7 @@
                 <h5>Sepetteki Ürünler</h5>
             </div>
             <div class="card-body">
-                <form method="post" asp-action="UpdateCart" asp-controller="Home">
+                <form method="post" asp-action="UpdateCartItem" asp-controller="Cart">
                     <table class="table">
                         <thead>
                             <tr>
@@ -33,16 +33,22 @@
                                     <td>@item.Value.Product.UnitPrice</td>
                                     <td>@item.Value.SubTotal</td>
                                     <td>
-                                        <input type="number" class="form-control" name="Quantities[@item.Key]" value="@item.Value.Quantity" min="1" />
+                                        <form method="post" asp-action="UpdateCartItem" asp-controller="Cart">
+                                        <input type="hidden" name="id" value="@item.Value.Product.ID"/>
+                                        <input type="number" class="form-control" name="quantity" value="@item.Value.Quantity" min="1" />
+                                        <button type="submit" class="btn btn-sm btn-warning mt-2">
+                                        Update
+                                        </button>
+                                        </form>
                                     </td>
                                     <td>
-                                        <a class="btn btn-sm btn-danger" asp-action="RemoveCartItem" asp-controller="Home" asp-route-id="@item.Value.Product.ID">Kaldır</a>
+                                        <a class="btn btn-sm btn-danger" asp-action="RemoveCartItem" asp-controller="Cart" asp-route-id="@item.Value.Product.ID">Remove</a>
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-primary">Sepeti Güncelle</button>
+                    @* <button type="submit" class="btn btn-primary">Sepeti Güncelle</button> *@
                 </form>
             </div>
         </div>
