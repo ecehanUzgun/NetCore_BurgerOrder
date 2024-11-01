@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NetCore_BurgerOrder.Models.Data;
 using NetCore_BurgerOrder.Models.Entities;
 using System.Reflection.Emit;
 
@@ -13,6 +14,7 @@ namespace NetCore_BurgerOrder.Models.Context
             
         }
 
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
@@ -21,7 +23,10 @@ namespace NetCore_BurgerOrder.Models.Context
         {
             base.OnModelCreating(builder);
 
-            //Mapping
+            //Category Properties
+            builder.Entity<Category>().HasData(CategoryData.Categories);
+            builder.Entity<Category>().Property(x => x.CategoryName).HasMaxLength(50);
+            builder.Entity<Category>().Property(x => x.Description).HasMaxLength(150);
 
             //Order
             builder.Entity<Order>()
@@ -45,6 +50,7 @@ namespace NetCore_BurgerOrder.Models.Context
 
             builder.Entity<OrderDetail>().Property(x => x.UnitPrice).HasColumnType("decimal(18,4)");
 
+
             //Product
             builder.Entity<Product>()
                 .HasOne(x => x.Category)
@@ -52,6 +58,8 @@ namespace NetCore_BurgerOrder.Models.Context
                 .HasForeignKey(x => x.CategoryId);
 
             builder.Entity<Product>().Property(x => x.UnitPrice).HasColumnType("decimal(18,4)");
+            builder.Entity<Product>().Property(x => x.ProductName).HasMaxLength(50);
+            builder.Entity<Product>().HasData(ProductData.Products);
         }   
     }
 }

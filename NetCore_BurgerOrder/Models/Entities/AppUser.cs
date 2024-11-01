@@ -8,6 +8,6 @@ namespace NetCore_BurgerOrder.Models.Entities
         public DateTime? BirthDate { get; set; }
 
         //Relational Properties
-        public List<Order>? Orders { get; set; }
+        public List<Order>? Orders { get; set; } //Sonradan nullable yaptım
     }
 }

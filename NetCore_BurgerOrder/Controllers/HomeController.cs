@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NetCore_BurgerOrder.Models;
 using NetCore_BurgerOrder.Models.Context;
 using NetCore_BurgerOrder.Models.Entities;
@@ -23,9 +24,12 @@ namespace NetCore_BurgerOrder.Controllers
             _signInManager = signInManager;
         }
 
+        //TODO: Listelenen ürünler kategorilerine göre filtrelenebilsin.
         public IActionResult Index()
         {
-            return View();
+            // Category bilgisiyle birlikte tüm ürünler listelenecek
+            var products = _context.Products.Include(p => p.Category).ToList();
+            return View(products);
         }
 
         //Register

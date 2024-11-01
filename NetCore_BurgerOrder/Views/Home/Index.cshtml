@@ -1,8 +1,40 @@
-﻿@{
+﻿@model List<Product>
+
+@{
     ViewData["Title"] = "Home Page";
 }
+<div class="col-md-12">
+    @if (TempData["SuccessStatus"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessStatus"]
+        </div>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Unit Price</th>
+                <th>Category Name</th>
+                <th>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.UnitPrice</td>
+                    <td>@item.Category.CategoryName</td>
+                    <td>
+                        <a asp-action="AddToCart" asp-controller="Home" asp-route-id="@item.ID" class="btn btn-primary">AddToCart</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

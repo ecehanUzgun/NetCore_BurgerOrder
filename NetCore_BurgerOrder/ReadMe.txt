@@ -11,7 +11,7 @@ Identity, Cookie, Session kullanýlacak.
 ++ Login ->Controller ->View (RememberMe ekle)
 ++ Area Template
 -- Admin giriþ yaptýðýnda Dashboard'a yönlendirsin
--- Dashboard Update Create
+++ Dashboard Update Create
 ++ Role CRUD (Admin yapabilir)
 -- User CRUD (Admin yapabilir)	*****
 -- Admin rolündeki kullanýcý giriþ yaptýðýnda Adminlte ekraný açýlsýn.
@@ -22,3 +22,7 @@ Identity, Cookie, Session kullanýlacak.
 ++ Create Role, description ekle
 
 ++ Area'da Logout, Account çalýþmýyor!!!!! -> Çözüldü _Layout'da area="" tanýmlayarak
+-- Delete for Role and User does not work!!!!
+
+--ADMINLTE
+--NTIER Architecture
