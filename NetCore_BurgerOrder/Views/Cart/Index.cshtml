@@ -1,0 +1,61 @@
+﻿@model CartSession
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal? totalPrice = 0;
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header">
+                <h5>Sepetteki Ürünler</h5>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-action="UpdateCart" asp-controller="Home">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ürün Ad</th>
+                                <th>Birim Fiyat</th>
+                                <th>Ara Toplam</th>
+                                <th>Adet</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.MyCart)
+                            {
+                                totalPrice += item.Value.SubTotal;
+                                <tr>
+                                    <td>@item.Value.Product.ProductName</td>
+                                    <td>@item.Value.Product.UnitPrice</td>
+                                    <td>@item.Value.SubTotal</td>
+                                    <td>
+                                        <input type="number" class="form-control" name="Quantities[@item.Key]" value="@item.Value.Quantity" min="1" />
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-danger" asp-action="RemoveCartItem" asp-controller="Home" asp-route-id="@item.Value.Product.ID">Kaldır</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-primary">Sepeti Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card-header">
+            <h5>Sepet Özet</h5>
+        </div>
+        <div class="card-body">
+            <h1>Toplam Tutar: <span>@totalPrice</span> TL</h1>
+            <a asp-action="CompleteOrder" asp-controller="Home" class="mt-2 btn btn-success">Alışverişi Tamamla</a>
+        </div>
+    </div>
+</div>
+
+

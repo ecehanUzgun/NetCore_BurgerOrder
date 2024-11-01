@@ -42,6 +42,12 @@ namespace NetCore_BurgerOrder
             // AddIdentity AppUser AppRole 
             builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ProjectContext>();
 
+            builder.Services.AddSession(x =>
+            {
+                x.Cookie.Name = "Sepet_Session";
+                x.IdleTimeout = TimeSpan.FromMinutes(1);
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -51,6 +57,9 @@ namespace NetCore_BurgerOrder
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //System.InvalidOperationException: 'Session has not been configured for this application or request.' hatasý Session eklenmediðinde oluþur.
+            app.UseSession();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
