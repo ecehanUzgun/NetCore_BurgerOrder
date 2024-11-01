@@ -26,3 +26,7 @@ Identity, Cookie, Session kullanýlacak.
 
 --ADMINLTE
 --NTIER Architecture
+
+***Session 
+--Sipariþi tamamla butonuna týklandýðýnda form açýlacak, açýlan form doldurulduðunda (user) sipariþiniz oluþturuldu .
+--Sepet boþ ise sipariþ oluþturulamaz!

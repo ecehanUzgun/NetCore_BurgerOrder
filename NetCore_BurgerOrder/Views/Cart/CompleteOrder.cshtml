@@ -1,0 +1,15 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "CompleteOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.AppUser.UserName Sipariş Bilgileri</h2>
+<form asp-action="CompleteOrder" asp-controller="Cart" method="post">
+    <div class="form-group">
+        <label for="RequiredDate">Teslimat Tarihi</label>
+        <input type="date" class="form-control" id="RequiredDate" name="RequiredDate" required/>
+    </div>
+    <button type="submit" class="btn btn-primary">Siparişi Tamamla</button>
+</form>
+
